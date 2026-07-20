@@ -5,8 +5,10 @@ name: Release
 # is Sigstore-signed and tied to this exact workflow run. Users can verify
 # with `npm audit signatures`.
 #
-# Required repo secrets:
-#   NPM_TOKEN — npm Granular Access Token scoped to xhood, "Publish" only.
+# Auth: npm Trusted Publishing (OIDC). No secrets — the trusted publisher is
+# configured at npmjs.com/package/xhood/access and must name this repo and
+# this workflow filename exactly. npm does not validate that config when you
+# save it, so a mismatch only shows up here as a 404/ENEEDAUTH on publish.
 #
 # Required workflow permissions (already declared below):
 #   contents: write  — to create the GitHub Release.
@@ -33,6 +35,8 @@ jobs:
           node-version: 22
           cache: pnpm
           registry-url: "https://registry.npmjs.org"
+      # Trusted publishing (OIDC) needs npm >= 11.5.1; Node 22 ships npm 10.x.
+      - run: npm install -g npm@latest
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
       - run: pnpm test
@@ -46,9 +50,10 @@ jobs:
             echo "::error::package.json version ($PKG_VERSION) does not match git tag ($TAG_VERSION)"
             exit 1
           fi
+      # Auth comes from OIDC (trusted publishing) — no NPM_TOKEN secret. The
+      # `id-token: write` permission above is what makes it work; provenance
+      # is implied by trusted publishing but stays explicit for clarity.
       - name: Publish to npm with provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --provenance --access public
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
