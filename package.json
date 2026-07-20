@@ -1,6 +1,6 @@
 {
   "name": "xhood",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "xHood — talk to your Hermes agent from the terminal.",
   "type": "module",
   "bin": {
