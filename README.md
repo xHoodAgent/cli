@@ -2,7 +2,7 @@
 
 > Talk to your [Hermes agent](https://hermes-agent.nousresearch.com) from your own terminal.
 
-The **xHood CLI** is a thin terminal client for the [xHood](https://xhoodagent.app) platform.  Authenticate with a device-code flow, then `xhood term` drops you straight into your agent's pty — the same Hermes you provision in the browser, in iTerm/wezterm/Ghostty.
+The **xHood CLI** is a thin terminal client for the [xHood](https://www.xhoodagent.app) platform.  Authenticate with a device-code flow, then `xhood term` drops you straight into your agent's pty — the same Hermes you provision in the browser, in iTerm/wezterm/Ghostty.
 
 ## Install
 
@@ -40,7 +40,7 @@ Authenticates this machine if needed (opens a browser to xhoodagent.app to appro
 
 ### Flags
 
-- `--base-url <url>` — point at a non-default control plane (default: `https://xhoodagent.app`).
+- `--base-url <url>` — point at a non-default control plane (default: `https://www.xhoodagent.app`).
 - `--bridge-url <url>` — override the term-bridge WebSocket URL (the CLI normally fetches this from the server during auth).
 
 You can also set `XHOOD_BASE_URL` or `XHOOD_CONFIG_DIR` in the environment.

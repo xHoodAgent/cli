@@ -7,7 +7,7 @@ import { runWhoamiCommand } from "./commands/whoami.js";
 import { runLogoutCommand } from "./commands/logout.js";
 import { runTermCommand } from "./commands/term.js";
 
-const DEFAULT_BASE_URL = process.env.XHOOD_BASE_URL ?? "https://xhoodagent.app";
+const DEFAULT_BASE_URL = process.env.XHOOD_BASE_URL ?? "https://www.xhoodagent.app";
 
 const program = new Command();
 program.name("xhood").version(CLI_VERSION);
